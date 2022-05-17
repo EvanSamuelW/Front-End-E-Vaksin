@@ -1,6 +1,6 @@
 <template>
   <v-dialog v-model="visibility" max-width="700px" @input="close">
-    <v-card>
+    <v-card style="overflow-x: hidden">
       <v-row>
         <v-col class="pa-8">
           <v-select
@@ -12,99 +12,111 @@
         <v-col> </v-col>
       </v-row>
 
-      <div
-        class="pa-5 pl-10 pb-10"
-        v-for="schedule in paginated"
-        :key="String(schedule.schedule)"
-      >
-        <p style="font-size: 32px; font-weight: 600" class="mb-5">
-          {{ new Date(schedule.start.split("T")[0]).toDateString() }}
-        </p>
-        <v-row>
-          <v-col cols="12" md="9">
-            <p style="font-size: 20px; color: #5b5a5a; margin-bottom: 30px">
-              {{ schedule.start.split("T")[1].split(":00.000Z")[0] }} -
-              {{ schedule.end.split("T")[1].split(":00.000Z")[0] }}
-            </p>
-            <v-row>
-              <p style="font-size: 18px; color: #767272" class="ml-3">
-                Vaksin:
+      <div v-if="!isEmpty">
+        <div
+          class="pa-5 pl-10 pb-10"
+          v-for="schedule in paginated"
+          :key="String(schedule.schedule)"
+        >
+          <p style="font-size: 32px; font-weight: 600" class="mb-5">
+            {{ new Date(schedule.start.split("T")[0]).toDateString() }}
+          </p>
+          <v-row>
+            <v-col cols="12" md="9">
+              <p style="font-size: 20px; color: #5b5a5a; margin-bottom: 30px">
+                {{ schedule.start.split("T")[1].split(":00.000Z")[0] }} -
+                {{ schedule.end.split("T")[1].split(":00.000Z")[0] }}
               </p>
-              <v-chip
-                v-for="x in schedule.vaccines"
-                v-bind:key="String(x.vaccine._id) + String(schedule._id)"
-                class="mb-6 ml-3"
-                label
-              >
-                {{ x.vaccine.name }}
-              </v-chip>
-            </v-row>
-            <v-row>
-              <v-chip
-                v-if="schedule.vaksin1"
-                tile
-                color="#248232"
-                class="white--text mr-2 ml-3"
-              >
-                <v-icon left> mdi-check </v-icon>
-                Dosis 1
-              </v-chip>
-              <v-chip
-                v-if="schedule.vaksin2"
-                tile
-                color="#248232"
-                class="white--text mr-2"
-              >
-                <v-icon left> mdi-check </v-icon>
-                Dosis 2
-              </v-chip>
-              <v-chip
-                v-if="schedule.vaksinBooster"
-                tile
-                color="#248232"
-                class="white--text"
-              >
-                <v-icon left> mdi-check </v-icon>
-                Dosis Booster
-              </v-chip>
-            </v-row>
-          </v-col>
-          <v-col cols="12" md="3">
-            <v-row>
-              <p style="font-size: 20px" v-if="!schedule.isLansia">Lansia</p>
-              <p style="font-size: 20px" v-if="schedule.isLansia">Umum</p>
-            </v-row>
-            <v-row style="margin-top: -10px">
-              <p style="font-size: 20px">{{ schedule.age }} +</p>
-            </v-row>
-            <v-row style="margin-top: -15px"
-              ><v-col>
-                <v-btn
-                  @click="
-                    chooseSchedule(
-                      schedule._id,
-                      schedule.vaksin1,
-                      schedule.vaksin2,
-                      schedule.vaksinBooster
-                    )
-                  "
-                  style="font-weight: bolder; margin-left: -10px"
-                  color="#22577E"
-                  outlined
+              <v-row>
+                <p style="font-size: 18px; color: #767272" class="ml-3">
+                  Vaksin:
+                </p>
+                <v-chip
+                  v-for="x in schedule.vaccines"
+                  v-bind:key="String(x.vaccine._id) + String(schedule._id)"
+                  class="mb-6 ml-3"
+                  label
                 >
-                  Daftar
-                </v-btn>
-              </v-col>
-            </v-row>
-          </v-col>
-        </v-row>
+                  {{ x.vaccine.name }}
+                </v-chip>
+              </v-row>
+              <v-row>
+                <v-chip
+                  v-if="schedule.vaksin1"
+                  tile
+                  color="#248232"
+                  class="white--text mr-2 ml-3"
+                >
+                  <v-icon left> mdi-check </v-icon>
+                  Dosis 1
+                </v-chip>
+                <v-chip
+                  v-if="schedule.vaksin2"
+                  tile
+                  color="#248232"
+                  class="white--text mr-2"
+                >
+                  <v-icon left> mdi-check </v-icon>
+                  Dosis 2
+                </v-chip>
+                <v-chip
+                  v-if="schedule.vaksinBooster"
+                  tile
+                  color="#248232"
+                  class="white--text"
+                >
+                  <v-icon left> mdi-check </v-icon>
+                  Dosis Booster
+                </v-chip>
+              </v-row>
+            </v-col>
+            <v-col cols="12" md="3">
+              <v-row>
+                <p style="font-size: 20px" v-if="!schedule.isLansia">Lansia</p>
+                <p style="font-size: 20px" v-if="schedule.isLansia">Umum</p>
+              </v-row>
+              <v-row style="margin-top: -10px">
+                <p style="font-size: 20px">{{ schedule.age }} +</p>
+              </v-row>
+              <v-row style="margin-top: -15px"
+                ><v-col>
+                  <v-btn
+                    @click="
+                      chooseSchedule(
+                        schedule._id,
+                        schedule.vaksin1,
+                        schedule.vaksin2,
+                        schedule.vaksinBooster
+                      )
+                    "
+                    style="font-weight: bolder; margin-left: -10px"
+                    color="#22577E"
+                    outlined
+                  >
+                    Daftar
+                  </v-btn>
+                </v-col>
+              </v-row>
+            </v-col>
+          </v-row>
+        </div>
+        <v-pagination
+          class="mt-5 pb-3"
+          v-model="page"
+          :length="schedulePages"
+          v-if="paginated.length != 0"
+          :total-visible="7"
+        ></v-pagination>
       </div>
-      <v-pagination
-        class="mt-5 pb-3"
-        v-model="page"
-        :length="schedulePages"
-        :total-visible="7"
-      ></v-pagination>
+      <div v-if="paginated.length == 0" style="margin-left: 20%" class="pa-10">
+        <v-img
+          src="/data_empty.svg"
+          contain
+          height="150px"
+          width="200px"
+        ></v-img>
+        <h1 style="color: #22577e">Jadwal Tidak Ditemukan</h1>
+      </div>
     </v-card>
   </v-dialog>
 </template>
@@ -140,6 +152,7 @@ export default {
       page: 1,
       PerPages: 3,
       partner: "",
+      isEmpty: false,
       schedulePages: 0,
       dose: "",
       vaccineDose: ["Dosis 1", "Dosis 2", "Dosis Booster"],
@@ -170,6 +183,7 @@ export default {
           this.schedulePages = Math.ceil(
             this.allSchedule.length / this.PerPages
           );
+          this.paginated == [] ? (this.isEmpty = true) : (this.isEmpty = false);
         })
         .catch((error) => {
           console.log(error.response.data.message);

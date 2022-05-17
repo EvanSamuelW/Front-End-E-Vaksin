@@ -111,12 +111,7 @@
                     />
                     <v-btn
                       fab
-                      v-if="
-                        $vuetify.breakpoint.name != 'sm' &&
-                        $vuetify.breakpoint.name != 'xs'
-                      "
                       color="primary"
-                      small
                       class="msg_send_btn"
                       @click="saveMessage"
                     >
