@@ -11,7 +11,7 @@
         class="mb-6 container"
         style="width: 900px; margin: auto"
         elevation="3"
-        v-for="transaction in allTransaction"
+        v-for="transaction in paginated"
         :key="String(transaction._id)"
       >
         <div class="corner">
@@ -317,8 +317,6 @@ export default {
     return {
       page: 1,
       pageSize: 3,
-      sortedPartner: [],
-      partnerPages: 3,
       formDialog: false,
       complainDialog: false,
       qrcode: "",
@@ -385,7 +383,7 @@ export default {
     },
 
     paginated() {
-      return this.allPartner.slice(
+      return this.allTransaction.slice(
         (this.page - 1) * this.pageSize,
         this.page * this.pageSize
       );
