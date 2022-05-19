@@ -23,10 +23,10 @@ export default {
 
 
 <style scoped>
-.fullheight {
-  min-height: 100vh !important;
-}
 #app {
   background-color: #e5e5e5;
+}
+.fullheight {
+  min-height: 100vh !important;
 }
 </style>

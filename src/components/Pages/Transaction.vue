@@ -256,11 +256,15 @@
       <v-pagination
         class="mt-5 pb-3"
         v-model="page"
+        v-if="!paginated.length == 0"
         :length="transactionPages"
         :total-visible="7"
       ></v-pagination>
     </div>
-
+    <div v-if="paginated.length == 0" style="margin-left: 30%" class="pa-10">
+      <v-img src="/data_empty.svg" contain height="350px" width="350px"></v-img>
+      <h1 style="color: #22577e">Belum ada Vaksinasi Terdaftar</h1>
+    </div>
     <v-dialog v-model="complainDialog" max-width="500px">
       <v-card>
         <v-card-title

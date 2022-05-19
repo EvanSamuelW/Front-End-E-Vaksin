@@ -60,6 +60,23 @@
               </div>
               <div class="mesgs">
                 <div class="msg_history" ref="container">
+                  <div :style="margin" v-if="filteredRoom.length == 0">
+                    <v-img
+                      src="/begin_chat.svg"
+                      contain
+                      height="350px"
+                      width="350px"
+                    ></v-img>
+                    <h1
+                      v-if="$vuetify.breakpoint.name == 'lg'"
+                      style="color: #22577e"
+                    >
+                      Data Konsultasi tidak Ditemukan
+                    </h1>
+                    <h2 v-else style="color: #22577e">
+                      Data Konsultasi tidak Ditemukan
+                    </h2>
+                  </div>
                   <v-chip
                     v-if="schedule != '' && $vuetify.breakpoint.name == 'lg'"
                     color="#ebebeb"
@@ -103,6 +120,7 @@
                 <div class="type_msg">
                   <div class="input_msg_write">
                     <input
+                      v-if="filteredRoom.length != 0"
                       type="text"
                       class="write_msg"
                       v-model="message"
@@ -111,6 +129,7 @@
                     />
                     <v-btn
                       fab
+                      v-if="filteredRoom.length != 0"
                       color="primary"
                       class="msg_send_btn"
                       @click="saveMessage"
@@ -155,6 +174,18 @@ export default {
     currentUser: {
       get() {
         return this.$store.state.currentUser.user;
+      },
+    },
+    margin: {
+      get() {
+        if (
+          this.$vuetify.breakpoint.name == "lg" ||
+          this.$vuetify.breakpoint.name == "xl"
+        ) {
+          return "margin-left: 10%";
+        } else {
+          return "";
+        }
       },
     },
     filteredRoom: function () {
