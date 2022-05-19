@@ -1,6 +1,13 @@
 <template>
   <v-main>
-    <div class="messaging">
+    <div :style="margin" v-if="filteredRoom.length == 0">
+      <v-img src="/begin_chat.svg" contain height="350px" width="350px"></v-img>
+      <h1 v-if="$vuetify.breakpoint.name == 'lg'" style="color: #22577e">
+        Data Konsultasi tidak Ditemukan
+      </h1>
+      <h2 v-else style="color: #22577e">Data Konsultasi tidak Ditemukan</h2>
+    </div>
+    <div v-else class="messaging">
       <body>
         <div class="container">
           <div class="messaging">
@@ -60,23 +67,6 @@
               </div>
               <div class="mesgs">
                 <div class="msg_history" ref="container">
-                  <div :style="margin" v-if="filteredRoom.length == 0">
-                    <v-img
-                      src="/begin_chat.svg"
-                      contain
-                      height="350px"
-                      width="350px"
-                    ></v-img>
-                    <h1
-                      v-if="$vuetify.breakpoint.name == 'lg'"
-                      style="color: #22577e"
-                    >
-                      Data Konsultasi tidak Ditemukan
-                    </h1>
-                    <h2 v-else style="color: #22577e">
-                      Data Konsultasi tidak Ditemukan
-                    </h2>
-                  </div>
                   <v-chip
                     v-if="schedule != '' && $vuetify.breakpoint.name == 'lg'"
                     color="#ebebeb"
@@ -182,7 +172,7 @@ export default {
           this.$vuetify.breakpoint.name == "lg" ||
           this.$vuetify.breakpoint.name == "xl"
         ) {
-          return "margin-left: 10%";
+          return "margin-left: 30%";
         } else {
           return "";
         }
