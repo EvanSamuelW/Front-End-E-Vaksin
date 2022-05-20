@@ -166,6 +166,19 @@
           >
             Isi Form Skrining
           </v-card-title>
+          <div
+            v-if="allQuestion.length == 0"
+            style="margin-left: 20%"
+            class="pa-10"
+          >
+            <v-img
+              src="/data_empty.svg"
+              contain
+              height="150px"
+              width="200px"
+            ></v-img>
+            <h1 style="color: #22577e">Form Tidak Ditemukan</h1>
+          </div>
           <div class="pa-5">
             <div v-for="csv in allQuestion.questions" :key="csv.No">
               <div>

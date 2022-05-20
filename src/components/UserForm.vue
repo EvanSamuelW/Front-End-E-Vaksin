@@ -43,6 +43,7 @@
                 type="number"
                 v-model="formUser.nik"
                 label="NIK"
+                :rules="nikRules"
               ></v-text-field>
             </v-col>
             <v-col>
@@ -129,9 +130,9 @@
           <div id="preview">
             <img
               :src="
-                inputType == 'Tambah' && imageUrl2 != ''
-                  ? imageUrl2
-                  : 'https://e-vaksin.xyz/api/ktp/' + formUser.ktp
+                inputType == 'Ubah'
+                  ? 'https://e-vaksin.xyz/api/ktp/' + formUser.ktp
+                  : imageUrl2
               "
               style="max-width: 200px; max-height: 200px"
             />
@@ -205,6 +206,10 @@ export default {
     return {
       visibility: false,
       nameRules: [(v) => !!v || "Area ini wajib diisi"],
+      nikRules: [
+        (v) => !!v || "NIK wajib diisi",
+        (v) => (v && v.length == 16) || "NIK terdiri dari 16 angka",
+      ],
       pass: "",
       imageUrl2: "",
       menu2: false,
