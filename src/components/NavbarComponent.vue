@@ -19,7 +19,6 @@
           E-Vaksin.Com
         </v-list-item-title>
       </v-list-item>
-      <!-- <v-divider color="white"></v-divider> -->
       <v-list>
         <v-list-item
           v-for="link in links"
