@@ -7,6 +7,7 @@
             v-model="dose"
             :items="vaccineDose"
             label="Filter Dosis Vaksin"
+            outlined
           ></v-select>
         </v-col>
         <v-col> </v-col>

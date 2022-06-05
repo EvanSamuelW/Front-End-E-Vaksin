@@ -25,6 +25,7 @@
               <v-card-text>
                 <v-form ref="form">
                   <v-text-field
+                    outlined
                     v-model="form.email"
                     label="Email"
                     name="username"
@@ -33,10 +34,12 @@
                     :rules="emailRules"
                     @keyup.enter="submit"
                     hide-details="auto"
-                    prepend-icon="mdi-account"
+                    prepend-inner-icon="mdi-account"
                   ></v-text-field>
 
                   <v-text-field
+                    class="mt-2"
+                    outlined
                     type="password"
                     v-model="form.password"
                     label="Kata Sandi"
@@ -44,7 +47,7 @@
                     :rules="passwordRules"
                     @keyup.enter="submit"
                     hide-details="auto"
-                    prepend-icon="mdi-lock"
+                    prepend-inner-icon="mdi-lock"
                   ></v-text-field>
                 </v-form>
               </v-card-text>
@@ -398,8 +401,9 @@
                 <div class="pa-5">
                   <v-form ref="formEmail">
                     <v-text-field
+                      outlined
                       v-model="email"
-                      prepend-icon="mail"
+                      prepend-inner-icon="mail"
                       label="Email"
                       :rules="emailRules"
                     ></v-text-field>
