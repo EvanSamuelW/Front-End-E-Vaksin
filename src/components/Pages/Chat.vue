@@ -1,12 +1,34 @@
 <template>
   <v-main>
-    <div :style="margin" v-if="filteredRoom.length == 0">
-      <v-img src="/begin_chat.svg" contain height="350px" width="350px"></v-img>
-      <h1 v-if="$vuetify.breakpoint.name == 'lg'" style="color: #22577e">
-        Data Konsultasi tidak Ditemukan
-      </h1>
-      <h2 v-else style="color: #22577e">Data Konsultasi tidak Ditemukan</h2>
-    </div>
+    <v-row
+      v-if="filteredRoom.length == 0"
+      style="min-height: 80vh"
+      align="center"
+      justify="center"
+      v-bind:style="{ height: deviceHeight * 0.6 + 'px' }"
+    >
+      <v-col class="fill-height" height="500">
+        <v-card
+          elevation="0"
+          color="#e5e5e5"
+          class="text-center d-flex flex-column align-center justify-center"
+          height="100%"
+        >
+          <div
+            style="display: flex; justify-content: center  flex-direction:row;"
+          >
+            <v-img
+              src="/begin_chat.svg"
+              contain
+              height="350px"
+              width="350px"
+            ></v-img>
+          </div>
+          <h1 style="color: #22577e">Data Konsultasi tidak Ditemukan</h1>
+        </v-card>
+      </v-col>
+    </v-row>
+
     <div v-else class="messaging">
       <body>
         <div class="container">

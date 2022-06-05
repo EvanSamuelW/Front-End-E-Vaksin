@@ -8,7 +8,7 @@
     />
     <div>
       <v-card
-        class="mb-6 container"
+        class="mb-6 containers"
         style="width: 900px; margin: auto"
         elevation="3"
         v-for="transaction in paginated"
@@ -166,19 +166,39 @@
           >
             Isi Form Skrining
           </v-card-title>
-          <div
+          <v-row
             v-if="allQuestion.length == 0"
-            style="margin-left: 20%"
-            class="pa-10"
+            style="min-height: 80vh"
+            align="center"
+            justify="center"
+            v-bind:style="{ height: deviceHeight * 0.6 + 'px' }"
           >
-            <v-img
-              src="/data_empty.svg"
-              contain
-              height="150px"
-              width="200px"
-            ></v-img>
-            <h1 style="color: #22577e">Form Tidak Ditemukan</h1>
-          </div>
+            <v-col class="fill-height" height="500">
+              <v-card
+                elevation="0"
+                class="
+                  text-center
+                  d-flex
+                  flex-column
+                  align-center
+                  justify-center
+                "
+                height="100%"
+              >
+                <div
+                  style="display: flex; justify-content: center  flex-direction:row;"
+                >
+                  <v-img
+                    src="/data_empty.svg"
+                    contain
+                    height="350px"
+                    width="350px"
+                  ></v-img>
+                </div>
+                <h1 style="color: #22577e">Form Tidak Ditemukan</h1>
+              </v-card>
+            </v-col>
+          </v-row>
           <div class="pa-5">
             <div v-for="csv in allQuestion.questions" :key="csv.No">
               <div>
@@ -274,10 +294,35 @@
         :total-visible="7"
       ></v-pagination>
     </div>
-    <div v-if="paginated.length == 0" style="margin-left: 30%" class="pa-10">
-      <v-img src="/data_empty.svg" contain height="350px" width="350px"></v-img>
-      <h1 style="color: #22577e">Belum ada Vaksinasi Terdaftar</h1>
-    </div>
+
+    <v-row
+      v-if="paginated.length == 0"
+      style="min-height: 80vh"
+      align="center"
+      justify="center"
+      v-bind:style="{ height: deviceHeight * 0.6 + 'px' }"
+    >
+      <v-col class="fill-height" height="500">
+        <v-card
+          elevation="0"
+          color="#e5e5e5"
+          class="text-center d-flex flex-column align-center justify-center"
+          height="100%"
+        >
+          <div
+            style="display: flex; justify-content: center  flex-direction:row;"
+          >
+            <v-img
+              src="/data_empty.svg"
+              contain
+              height="350px"
+              width="350px"
+            ></v-img>
+          </div>
+          <h1 style="color: #22577e">Belum ada Vaksinasi Terdaftar</h1>
+        </v-card>
+      </v-col>
+    </v-row>
     <v-dialog v-model="complainDialog" max-width="500px">
       <v-card>
         <v-card-title
@@ -521,14 +566,14 @@ export default {
 };
 </script>
 <style scoped>
-.container {
+.containers {
   position: relative;
 
   border-radius: 12px;
   overflow: hidden;
 }
 
-.container:after {
+.containers:after {
   content: "";
   width: 0;
   height: 0;

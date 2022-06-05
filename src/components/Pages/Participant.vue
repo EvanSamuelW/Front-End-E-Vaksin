@@ -519,7 +519,7 @@ export default {
       },
       devices: [],
       dialog2: false,
-      el: 2,
+      el: 1,
       imgPreUrl: this.$imageLink + "ktp/",
       img: "",
       imgKTP: "",

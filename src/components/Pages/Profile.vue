@@ -94,10 +94,17 @@
               <v-text-field
                 v-model="currentUser.phone"
                 label="Nomor Handphone"
+                type="number"
+                :rules="phoneRules"
               ></v-text-field>
             </v-col>
             <v-col>
-              <v-text-field v-model="currentUser.nik" label="NIK"></v-text-field
+              <v-text-field
+                v-model="currentUser.nik"
+                label="NIK"
+                type="number"
+                :rules="nikRules"
+              ></v-text-field
             ></v-col>
           </v-row>
           <v-row>
@@ -198,6 +205,14 @@ export default {
   data() {
     return {
       nameRules: [(v) => !!v || "This Field is Required"],
+      nikRules: [
+        (v) => !!v || "NIK wajib diisi",
+        (v) => (v && v.length == 16) || "NIK terdiri dari 16 angka",
+      ],
+      phoneRules: [
+        (v) =>
+          /^08[0-9]{8,10}$/.test(v) || "Masukkan nomor handphone yang valid",
+      ],
       dialog: false,
       formsEdit: "",
       color: "",

@@ -221,4 +221,8 @@ export default {
 .fullheight {
   min-height: 100vh !important;
 }
+
+.dashboard {
+  background-color: #e5e5e5;
+}
 </style>
