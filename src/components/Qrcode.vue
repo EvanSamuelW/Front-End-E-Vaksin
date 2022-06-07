@@ -15,12 +15,7 @@
         max-width="500px"
         style="background-color: white; margin: auto"
       >
-        <qrcode-vue
-          style="margin-left: 27%"
-          :value="code"
-          :size="200"
-          level="H"
-        />
+        <qrcode-vue :style="marginQR" :value="code" :size="200" level="H" />
         <div
           style="
             margin-top: 20px;
@@ -104,6 +99,7 @@ export default {
   },
 
   name: "QrCodeComponent",
+
   methods: {
     onCancel() {
       this.$emit("cancelled");
@@ -117,6 +113,17 @@ export default {
           link.href = dataUrl;
           link.click();
         });
+    },
+  },
+  computed: {
+    marginQR: {
+      get() {
+        if (this.$vuetify.breakpoint.name == "lg") {
+          return "margin-left: 27%";
+        } else {
+          return "margin-left: 15%";
+        }
+      },
     },
   },
   watch: {
