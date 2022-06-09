@@ -400,6 +400,7 @@
                   <v-form ref="formEmail">
                     <v-text-field
                       v-model="email"
+                      outlined
                       prepend-inner-icon="mail"
                       label="Email"
                       :rules="emailRules"

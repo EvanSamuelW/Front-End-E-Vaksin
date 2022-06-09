@@ -73,8 +73,8 @@
             </v-col>
             <v-col cols="12" md="3">
               <v-row>
-                <p style="font-size: 20px" v-if="!schedule.isLansia">Lansia</p>
-                <p style="font-size: 20px" v-if="schedule.isLansia">Umum</p>
+                <p style="font-size: 20px" v-if="schedule.is_lansia">Lansia</p>
+                <p style="font-size: 20px" v-if="!schedule.is_lansia">Umum</p>
               </v-row>
               <v-row style="margin-top: -10px">
                 <p style="font-size: 20px">{{ schedule.age }} +</p>
