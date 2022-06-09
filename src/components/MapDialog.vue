@@ -1,18 +1,22 @@
  <template>
   <v-dialog v-model="visibility" max-width="700px" @input="$emit('cancelled')">
     <v-card>
-      <div>
+      <div class="pa-5">
         <div>
-          <h2>Cari Lokasi dan Letakkan Pin</h2>
+          <h2 class="ml-2">Cari Lokasi dan Letakkan Pin</h2>
           <GmapAutocomplete
+            class="mr-5 ml-2 input"
             @place_changed="setPlace"
             :options="{
               fields: ['geometry', 'formatted_address', 'address_components'],
             }"
           />
-          <v-btn @click="addMarker">Tambah</v-btn>
+          <v-btn color="primary" @click="addMarker"
+            ><v-icon left>mdi-map-marker</v-icon> Pilih Lokasi</v-btn
+          >
         </div>
         <br />
+
         <GmapMap :center="center" :zoom="12" style="width: 100%; height: 400px">
           <GmapMarker
             :key="index"
@@ -86,3 +90,13 @@ export default {
   },
 };
 </script>
+<style scoped>
+.input {
+  border: 2px solid #aaa;
+  border-radius: 4px;
+  margin: 8px 0;
+  outline: none;
+  padding: 5px;
+  box-sizing: border-box;
+}
+</style>

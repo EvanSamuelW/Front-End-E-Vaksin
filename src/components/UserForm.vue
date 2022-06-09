@@ -211,10 +211,7 @@ export default {
         (v) => (v && v.length == 16) || "NIK terdiri dari 16 angka",
       ],
       pass: "",
-      imageUrl2:
-        this.inputType == "Ubah"
-          ? "https://e-vaksin.xyz/api/ktp/" + this.formUser.ktp
-          : "",
+      imageUrl2: "",
       menu2: false,
       passwordRules: [(v) => !!v || "Kata Sandi wajib diisi"],
       phoneRules: [

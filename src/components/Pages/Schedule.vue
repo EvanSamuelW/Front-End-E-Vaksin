@@ -464,6 +464,8 @@
                 </template>
                 <v-date-picker
                   v-model="date"
+                  :min="new Date().toISOString().substr(0, 10)"
+                  required
                   @input="menu2 = false"
                 ></v-date-picker>
               </v-menu>

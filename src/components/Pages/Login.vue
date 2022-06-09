@@ -25,7 +25,6 @@
               <v-card-text>
                 <v-form ref="form">
                   <v-text-field
-                    outlined
                     v-model="form.email"
                     label="Email"
                     name="username"
@@ -34,12 +33,11 @@
                     :rules="emailRules"
                     @keyup.enter="submit"
                     hide-details="auto"
-                    prepend-inner-icon="mdi-account"
+                    prepend-icon="mdi-account"
                   ></v-text-field>
 
                   <v-text-field
                     class="mt-2"
-                    outlined
                     type="password"
                     v-model="form.password"
                     label="Kata Sandi"
@@ -47,7 +45,7 @@
                     :rules="passwordRules"
                     @keyup.enter="submit"
                     hide-details="auto"
-                    prepend-inner-icon="mdi-lock"
+                    prepend-icon="mdi-lock"
                   ></v-text-field>
                 </v-form>
               </v-card-text>
@@ -106,7 +104,7 @@
                         dialog2 = false;
                         isUser = false;
                       "
-                      class="mx-auto mt-10"
+                      class="mx-auto pa-5 mt-5"
                       justify="center"
                       max-width="300px"
                       style="border-radius: 10px"
@@ -141,7 +139,7 @@
                         dialog2 = false;
                         isUser = true;
                       "
-                      class="mx-auto mt-10"
+                      class="mx-auto mt-5 pa-5"
                       justify="center"
                       max-width="300px"
                       style="border-radius: 10px"
@@ -401,7 +399,6 @@
                 <div class="pa-5">
                   <v-form ref="formEmail">
                     <v-text-field
-                      outlined
                       v-model="email"
                       prepend-inner-icon="mail"
                       label="Email"
