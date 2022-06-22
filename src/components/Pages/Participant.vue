@@ -271,7 +271,7 @@
               id="img"
               height="300"
               width="300"
-              src="https://e-vaksin.xyz/api/ktp/1651741076233.png"
+              :src="imgKTP"
               crossorigin="anonymous"
               class="mr-2"
             /><img
@@ -279,7 +279,7 @@
               crossorigin="anonymous"
               height="300"
               width="300"
-              :src="this.img"
+              :src="img"
               class="img-responsive"
             />
             <v-row>
@@ -519,7 +519,7 @@ export default {
       },
       devices: [],
       dialog2: false,
-      el: 1,
+      el: 2,
       imgPreUrl: this.$imageLink + "ktp/",
       img: "",
       imgKTP: "",
@@ -636,7 +636,7 @@ export default {
         .then((response) => {
           this.openSnackbar("Berhasil verifikasi QR Code", "success");
           this.transactionId = response.data._id;
-          this.imgKTP = response.data.detailUser.ktp;
+          this.imgKTP = this.$imageLink + "ktp/" + response.data.detailUser.ktp;
           this.el = 2;
         })
         .catch((error) => {
@@ -719,6 +719,7 @@ export default {
     },
     compareFace() {
       this.loading = true;
+      // this.a = performance.now();
       Promise.all([
         faceapi.nets.faceRecognitionNet.loadFromUri("/models"),
         faceapi.nets.faceLandmark68Net.loadFromUri("/models"),
@@ -744,9 +745,20 @@ export default {
         fullFaceDescriptions2.descriptor,
         0.6
       );
+      // this.b = performance.now();
+      // console.log("It took " + (this.b - this.a) + " ms.");
+
       if (dist > 0.5) {
+        // alert(
+        //   "It took " + (this.b - this.a) / 1000 + " s and face not match" + dist
+        // );
+
         this.openSnackbar("Wajah tidak cocok", "error");
       } else {
+        // alert(
+        //   "It took " + (this.b - this.a) / 1000 + " s and face matched" + dist
+        // );
+
         this.verifyData();
         this.openSnackbar("Verifikasi berhasil", "success");
       }
